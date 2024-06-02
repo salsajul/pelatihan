@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 07:16 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Waktu pembuatan: 31 Bulan Mei 2024 pada 17.11
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,135 +24,156 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_dosen`
+-- Struktur dari tabel `tbl_dosen`
 --
 
 CREATE TABLE `tbl_dosen` (
-  `kd_dosen` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `alamat` varchar(255) NOT NULL
+  `kd_dosen` varchar(11) NOT NULL,
+  `nama_dosen` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_dosen`
+-- Dumping data untuk tabel `tbl_dosen`
 --
 
-INSERT INTO `tbl_dosen` (`kd_dosen`, `nama`, `alamat`) VALUES
-(5001, 'Ari', 'Jakarta'),
-(5002, 'Joko', 'Tangerang Selatan');
+INSERT INTO `tbl_dosen` (`kd_dosen`, `nama_dosen`) VALUES
+('0317047206', 'S.Sos. SYAFRIL CHAIRIANSYAH S.Sos., M.Kom.'),
+('0403089301', 'RAHMAWATI S.Kom., M.Kom.'),
+('0405078502', 'NURJAYA S.Kom, M.Kom'),
+('0407059301', 'ANDRIAN HIDAYAT S.Kom., M.Kom.'),
+('0418018104', 'MUKHAMAD KHOTIB ARIFAI SE.,MM.'),
+('0423058704', 'Dr. THOYYIBAH. T S.Kom., M.Kom'),
+('0426069301', 'RIA ESTER S.Kom., M.Kom.'),
+('0428088701', 'AGUNG PERDANANTO S.Kom, M.Kom'),
+('8817530017', 'Drs. H. JAZULI MUKHTAR M.M.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_jadwal`
+-- Struktur dari tabel `tbl_jadwal`
 --
 
 CREATE TABLE `tbl_jadwal` (
-  `id` int(11) NOT NULL,
-  `kd_dosen` int(11) NOT NULL,
-  `kd_matkul` int(11) NOT NULL,
-  `waktu` varchar(50) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
+  `kd_dosen` varchar(11) NOT NULL,
+  `kd_matkul` varchar(11) NOT NULL,
+  `jam` varchar(50) NOT NULL,
   `ruang` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_jadwal`
+-- Dumping data untuk tabel `tbl_jadwal`
 --
 
-INSERT INTO `tbl_jadwal` (`id`, `kd_dosen`, `kd_matkul`, `waktu`, `ruang`) VALUES
-(1, 5001, 1001, '19.00-20.00 WIB', 'V.601'),
-(2, 5002, 1002, '19.00-20.00 WIB', 'V.602');
+INSERT INTO `tbl_jadwal` (`id_jadwal`, `kd_dosen`, `kd_matkul`, `jam`, `ruang`) VALUES
+(15, '0426069301', 'TPL0512', '08.50 - 10.30', 'V. 629'),
+(16, '0403089301', 'TPL0522', '10.30 - 12.10', 'V. 629'),
+(17, '0407059301', 'TPL0533', '10.30 - 12.10', 'V. 629'),
+(19, '8817530017', 'TEK0052', '08.50 - 10.30', 'V. 601');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_krs`
+-- Struktur dari tabel `tbl_krs`
 --
 
 CREATE TABLE `tbl_krs` (
-  `id` int(11) NOT NULL,
-  `nim` int(11) NOT NULL,
+  `id_krs` int(11) NOT NULL,
+  `nim` varchar(12) NOT NULL,
   `id_jadwal` int(11) NOT NULL,
-  `kd_semester` int(11) NOT NULL
+  `kd_semester` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tbl_krs`
+--
+
+INSERT INTO `tbl_krs` (`id_krs`, `nim`, `id_jadwal`, `kd_semester`) VALUES
+(8, '201011401234', 19, 'SM001');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_mahasiswa`
+-- Struktur dari tabel `tbl_mahasiswa`
 --
 
 CREATE TABLE `tbl_mahasiswa` (
-  `nim` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
+  `nim` varchar(12) NOT NULL,
+  `nama_mahasiswa` varchar(225) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `jurusan` varchar(50) NOT NULL
+  `jurusan` varchar(59) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_mahasiswa`
+-- Dumping data untuk tabel `tbl_mahasiswa`
 --
 
-INSERT INTO `tbl_mahasiswa` (`nim`, `nama`, `alamat`, `jurusan`) VALUES
-(20114123, 'Dimas', 'Jakarta', 'Teknik Informatika'),
-(20114124, 'Heri', 'Jakarta', 'Teknik Informatika');
+INSERT INTO `tbl_mahasiswa` (`nim`, `nama_mahasiswa`, `alamat`, `jurusan`) VALUES
+('201011401234', 'Siti Munawaroh', 'Jakarta Barat', 'Akutansi'),
+('201011401925', 'Farhan Kamil', 'Depok', 'Teknik Informatika'),
+('201011401926', 'Budi Utomo', 'Jakarta Selatan', 'Teknik Elektro');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_matkul`
+-- Struktur dari tabel `tbl_matkul`
 --
 
 CREATE TABLE `tbl_matkul` (
-  `kd_matkul` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `sks` varchar(10) NOT NULL
+  `kd_matkul` varchar(11) NOT NULL,
+  `nama_matkul` varchar(50) NOT NULL,
+  `sks` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_matkul`
+-- Dumping data untuk tabel `tbl_matkul`
 --
 
-INSERT INTO `tbl_matkul` (`kd_matkul`, `nama`, `sks`) VALUES
-(1001, 'algo1', '2 sks'),
-(1002, 'web2', '3 sks');
+INSERT INTO `tbl_matkul` (`kd_matkul`, `nama_matkul`, `sks`) VALUES
+('TEK0052', 'KEWIRAUSAHAAN', '2 SKS'),
+('TPL0483', 'TESTING DAN QA PERANGKAT LUNAK', '3 SKS'),
+('TPL0512', 'KECAKAPAN ANTAR PERSONAL', '2 SKS'),
+('TPL0522', 'ETIKA PRODESI', '2 SKS'),
+('TPL0533', 'INTERAKSI MANUSIA DENGAN KOMPUTER', '3 SKS');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_semester`
+-- Struktur dari tabel `tbl_semester`
 --
 
 CREATE TABLE `tbl_semester` (
-  `kd_semester` int(11) NOT NULL,
+  `kd_semester` varchar(11) NOT NULL,
   `semester` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_semester`
+-- Dumping data untuk tabel `tbl_semester`
 --
 
 INSERT INTO `tbl_semester` (`kd_semester`, `semester`) VALUES
-(20221, 'Ganjil 2022/2023'),
-(20222, 'Genap 2022/2023');
+('SM001', 'GANJIL 2023/2024	'),
+('SM002', 'GENAP 2023/2024'),
+('SM003', 'GANJIL 2024/2025'),
+('SM004', 'GENAP 2024/2025');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_user`
+-- Struktur dari tabel `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_user`
+-- Dumping data untuk tabel `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id`, `username`, `password`) VALUES
+INSERT INTO `tbl_user` (`id_user`, `username`, `password`) VALUES
 (1, 'admin', 'admin');
 
 --
@@ -160,115 +181,91 @@ INSERT INTO `tbl_user` (`id`, `username`, `password`) VALUES
 --
 
 --
--- Indexes for table `tbl_dosen`
+-- Indeks untuk tabel `tbl_dosen`
 --
 ALTER TABLE `tbl_dosen`
   ADD PRIMARY KEY (`kd_dosen`);
 
 --
--- Indexes for table `tbl_jadwal`
+-- Indeks untuk tabel `tbl_jadwal`
 --
 ALTER TABLE `tbl_jadwal`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_jadwal`),
   ADD KEY `fk_matkul` (`kd_matkul`),
   ADD KEY `fk_dosen` (`kd_dosen`);
 
 --
--- Indexes for table `tbl_krs`
+-- Indeks untuk tabel `tbl_krs`
 --
 ALTER TABLE `tbl_krs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_mhs` (`nim`),
+  ADD PRIMARY KEY (`id_krs`),
+  ADD KEY `fk_nim` (`nim`),
   ADD KEY `fk_jadwal` (`id_jadwal`),
   ADD KEY `fk_semester` (`kd_semester`);
 
 --
--- Indexes for table `tbl_mahasiswa`
+-- Indeks untuk tabel `tbl_mahasiswa`
 --
 ALTER TABLE `tbl_mahasiswa`
   ADD PRIMARY KEY (`nim`);
 
 --
--- Indexes for table `tbl_matkul`
+-- Indeks untuk tabel `tbl_matkul`
 --
 ALTER TABLE `tbl_matkul`
   ADD PRIMARY KEY (`kd_matkul`);
 
 --
--- Indexes for table `tbl_semester`
+-- Indeks untuk tabel `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
   ADD PRIMARY KEY (`kd_semester`);
 
 --
--- Indexes for table `tbl_user`
+-- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_dosen`
---
-ALTER TABLE `tbl_dosen`
-  MODIFY `kd_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5003;
-
---
--- AUTO_INCREMENT for table `tbl_jadwal`
+-- AUTO_INCREMENT untuk tabel `tbl_jadwal`
 --
 ALTER TABLE `tbl_jadwal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `tbl_krs`
+-- AUTO_INCREMENT untuk tabel `tbl_krs`
 --
 ALTER TABLE `tbl_krs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tbl_mahasiswa`
---
-ALTER TABLE `tbl_mahasiswa`
-  MODIFY `nim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20114125;
-
---
--- AUTO_INCREMENT for table `tbl_matkul`
---
-ALTER TABLE `tbl_matkul`
-  MODIFY `kd_matkul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
-
---
--- AUTO_INCREMENT for table `tbl_semester`
---
-ALTER TABLE `tbl_semester`
-  MODIFY `kd_semester` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20223;
-
---
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tbl_jadwal`
+-- Ketidakleluasaan untuk tabel `tbl_jadwal`
 --
 ALTER TABLE `tbl_jadwal`
   ADD CONSTRAINT `fk_dosen` FOREIGN KEY (`kd_dosen`) REFERENCES `tbl_dosen` (`kd_dosen`),
   ADD CONSTRAINT `fk_matkul` FOREIGN KEY (`kd_matkul`) REFERENCES `tbl_matkul` (`kd_matkul`);
 
 --
--- Constraints for table `tbl_krs`
+-- Ketidakleluasaan untuk tabel `tbl_krs`
 --
 ALTER TABLE `tbl_krs`
-  ADD CONSTRAINT `fk_jadwal` FOREIGN KEY (`id_jadwal`) REFERENCES `tbl_jadwal` (`id`),
-  ADD CONSTRAINT `fk_mhs` FOREIGN KEY (`nim`) REFERENCES `tbl_mahasiswa` (`nim`),
+  ADD CONSTRAINT `fk_jadwal` FOREIGN KEY (`id_jadwal`) REFERENCES `tbl_jadwal` (`id_jadwal`),
+  ADD CONSTRAINT `fk_nim` FOREIGN KEY (`nim`) REFERENCES `tbl_mahasiswa` (`nim`),
   ADD CONSTRAINT `fk_semester` FOREIGN KEY (`kd_semester`) REFERENCES `tbl_semester` (`kd_semester`);
 COMMIT;
 
